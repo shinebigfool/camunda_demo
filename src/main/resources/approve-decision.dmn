@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_0yk67u6" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.0.0">
+  <decision id="approve-decision" name="Approve Decision">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Role">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>role</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1ean5s8" label="UseFor">
+        <inputExpression id="LiteralExpression_10q69w0" typeRef="string">
+          <text>useFor</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Passed" name="passed" typeRef="boolean" />
+      <rule id="DecisionRule_1otr3d3">
+        <inputEntry id="UnaryTests_0wy0be0">
+          <text>"NXY"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e2zehg">
+          <text>"funny"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1t25oep">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05olzpy">
+        <inputEntry id="UnaryTests_1uuyjsv">
+          <text>"NXY"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_065v1kd">
+          <text>"study"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06e2xtc">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1mjxf10">
+        <inputEntry id="UnaryTests_1spv360">
+          <text>not("NXY")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_083m7a5">
+          <text>"study"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13b11l4">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0uf26rd">
+        <inputEntry id="UnaryTests_129qswn">
+          <text>not("NXY")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17j6oet">
+          <text>not("study")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_144kkhc">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

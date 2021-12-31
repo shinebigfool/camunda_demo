@@ -1,0 +1,23 @@
+server:
+  port: 7000
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 111111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+camunda:
+  bpm:
+    database:
+      jdbc-batch-processing: false
+    auto-deployment-enabled: true
+    deployment-resource-pattern: classpath*:**/*.bpmn
+    admin-user:
+      id: admin
+      password: admin
+      first-name: admin
+    filter:
+      create: All tasks
