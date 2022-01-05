@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1h1b4g0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.5.0">
+  <bpmn:process id="listener_demo" isExecutable="true">
+    <bpmn:startEvent id="listener_start" name="开始">
+      <bpmn:outgoing>Flow_1i3vwgc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1i3vwgc" sourceRef="listener_start" targetRef="java_task" />
+    <bpmn:sequenceFlow id="Flow_1o9sie8" sourceRef="java_task" targetRef="human_task" />
+    <bpmn:userTask id="human_task" name="人工任务">
+      <bpmn:incoming>Flow_1o9sie8</bpmn:incoming>
+      <bpmn:incoming>Flow_0j7cgs3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hxu6ke</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="java_task" name="任务" camunda:class="com.example.demo.execute.DemoListenerExecution">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.example.demo.listener.DemoListener" event="start">
+          <camunda:field name="fixedValue">
+            <camunda:string>hello world</camunda:string>
+          </camunda:field>
+          <camunda:field name="dynamicValue">
+            <camunda:expression>${myVar}</camunda:expression>
+          </camunda:field>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1i3vwgc</bpmn:incoming>
+      <bpmn:outgoing>Flow_1o9sie8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="listener_end" name="结束">
+      <bpmn:incoming>Flow_1hxu6ke</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1hxu6ke" sourceRef="human_task" targetRef="listener_end" />
+    <bpmn:boundaryEvent id="exception_demo" attachedToRef="java_task">
+      <bpmn:outgoing>Flow_1huav11</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1tmuu04" errorRef="Error_06yqhzu" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1huav11" sourceRef="exception_demo" targetRef="exception_process" />
+    <bpmn:serviceTask id="exception_process" name="异常处理" camunda:class="com.example.demo.execute.DemoExceptionExecution">
+      <bpmn:incoming>Flow_1huav11</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xpegve</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0xpegve" sourceRef="exception_process" targetRef="human_task2" />
+    <bpmn:userTask id="human_task2" name="人工任务2">
+      <bpmn:incoming>Flow_0xpegve</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j7cgs3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0j7cgs3" sourceRef="human_task2" targetRef="human_task" />
+  </bpmn:process>
+  <bpmn:error id="Error_06yqhzu" name="task_error" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="listener_demo">
+      <bpmndi:BPMNEdge id="Flow_1hxu6ke_di" bpmnElement="Flow_1hxu6ke">
+        <di:waypoint x="210" y="220" />
+        <di:waypoint x="210" y="148" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1o9sie8_di" bpmnElement="Flow_1o9sie8">
+        <di:waypoint x="210" y="357" />
+        <di:waypoint x="210" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i3vwgc_di" bpmnElement="Flow_1i3vwgc">
+        <di:waypoint x="210" y="482" />
+        <di:waypoint x="210" y="437" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1huav11_di" bpmnElement="Flow_1huav11">
+        <di:waypoint x="278" y="400" />
+        <di:waypoint x="330" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xpegve_di" bpmnElement="Flow_0xpegve">
+        <di:waypoint x="380" y="360" />
+        <di:waypoint x="380" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j7cgs3_di" bpmnElement="Flow_0j7cgs3">
+        <di:waypoint x="330" y="260" />
+        <di:waypoint x="260" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="listener_start">
+        <dc:Bounds x="192" y="482" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="199" y="525" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fkq3i4_di" bpmnElement="human_task">
+        <dc:Bounds x="160" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b52u4y_di" bpmnElement="java_task">
+        <dc:Bounds x="160" y="357" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10tj56s_di" bpmnElement="listener_end">
+        <dc:Bounds x="192" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="199" y="82" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qc2wtt_di" bpmnElement="exception_process">
+        <dc:Bounds x="330" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nsd75b_di" bpmnElement="human_task2">
+        <dc:Bounds x="330" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17fa2qs_di" bpmnElement="exception_demo">
+        <dc:Bounds x="242" y="382" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

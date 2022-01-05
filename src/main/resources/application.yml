@@ -14,6 +14,8 @@ camunda:
     database:
       jdbc-batch-processing: false
     auto-deployment-enabled: true
+    # 历史级别
+    history-level: full
     deployment-resource-pattern: classpath*:**/*.bpmn
     admin-user:
       id: admin

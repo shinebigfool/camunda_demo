@@ -28,4 +28,12 @@ public class CamundaDemoController {
     public String approveTask(@RequestParam String taskId, @RequestParam boolean passed) {
         return camundaStartService.approveTask(taskId, passed);
     }
+    @GetMapping("/testQueryHistory")
+    public String testQueryHistory(Map<String,Object> params){
+        return camundaStartService.testQueryHistory(params);
+    }
+    @GetMapping("/test")
+    public String test(){
+        return camundaStartService.test();
+    }
 }
