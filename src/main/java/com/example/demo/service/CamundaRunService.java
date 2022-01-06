@@ -7,5 +7,5 @@ public interface CamundaRunService {
     String assignTask(String processInstanceId);
     String approveTask(String taskId, boolean passed);
     String testQueryHistory(Map<String,Object> params);
-    String test();
+    String startLinstenerBPMNDemo();
 }

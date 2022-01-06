@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.external.ProcessExternalTaskService;
 import com.example.demo.service.CamundaRunService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,8 @@ import java.util.Map;
 public class CamundaDemoController {
     @Autowired
     private CamundaRunService camundaStartService;
+    @Autowired
+    private ProcessExternalTaskService processExternalTaskService;
     @GetMapping("/start")
     public String startProcess(@RequestParam Map<String,Object> params){
         return camundaStartService.startProcess(params);
@@ -33,7 +37,12 @@ public class CamundaDemoController {
         return camundaStartService.testQueryHistory(params);
     }
     @GetMapping("/test")
-    public String test(){
-        return camundaStartService.test();
+    public String startLinstenerBPMNDemo(){
+        return camundaStartService.startLinstenerBPMNDemo();
+    }
+    @GetMapping("/external")
+    public String processExternalTask(@Param("approve") boolean approve){
+        processExternalTaskService.process(approve);
+        return "success";
     }
 }

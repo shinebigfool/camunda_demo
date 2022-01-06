@@ -10,6 +10,7 @@ import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.history.HistoricProcessInstanceReport;
 import org.camunda.bpm.engine.history.HistoricVariableInstance;
 import org.camunda.bpm.engine.runtime.Execution;
+import org.camunda.bpm.engine.runtime.Incident;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,12 +108,14 @@ public class CamundaRunServiceImpl implements CamundaRunService {
         // ?
         HistoricProcessInstanceReport historicProcessInstanceReport = historyService
                 .createHistoricProcessInstanceReport();
+        // http://camunda-cn.shaochenfeng.com/user-guide/process-engine/incidents/
+        List<Incident> list = runtimeService.createIncidentQuery().list();
 
         return "success";
     }
 
     @Override
-    public String test() {
+    public String startLinstenerBPMNDemo() {
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put("myVar", " listening!");
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("listener_demo", variables);
