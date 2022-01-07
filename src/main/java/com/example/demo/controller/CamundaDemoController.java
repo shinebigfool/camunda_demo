@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.TestParamDO;
 import com.example.demo.external.ProcessExternalTaskService;
 import com.example.demo.service.CamundaRunService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -44,5 +43,10 @@ public class CamundaDemoController {
     public String processExternalTask(@Param("approve") boolean approve){
         processExternalTaskService.process(approve);
         return "success";
+    }
+    @PostMapping("/startParamDemo")
+    public String startParamDemo(@RequestBody TestParamDO testParamDO){
+
+        return camundaStartService.startParamDemo(testParamDO);
     }
 }

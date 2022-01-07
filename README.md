@@ -19,3 +19,16 @@ job的retries变成0时 将会生成事件Incidents <br/>
 Administrative action is necessary to reset the retries<br/>
 camunda前端dashboard/processes页面找到失败的事件，点进去，点击刷新按钮(右侧或者底部Action)<br/>
 ![img.png](img.png)
+<br/>
+<br/>
+**q3:定时器?**<br/>
+https://www.jianshu.com/p/62955f271956 <br/>
+**Date**: 固定的时间日期 ISO 8601标准 2011-03-11T12:13:14Z<br/> 
+**Duration**: 时间段 XXX时间后 ISO 8601的两种格式 PT30S 三十秒后<br/>
+https://blog.csdn.net/weixin_33834910/article/details/85959587 <br/>
+**Cycle**: 时间周期 cron表达式周期性的触发 ISO 8601标准/cron表达式<br/>
+
+
+**基础概念**
+ProcessEngineConfiguration=>ProcessEngine=>...Service <br/>
+

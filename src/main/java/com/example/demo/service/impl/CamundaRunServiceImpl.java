@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.domain.TestParamDO;
 import com.example.demo.service.CamundaRunService;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RepositoryService;
@@ -122,5 +123,13 @@ public class CamundaRunServiceImpl implements CamundaRunService {
         Object varSetByListener = runtimeService.getVariable(processInstance.getId(), "var");
         System.out.println(varSetByListener);
         return "success";
+    }
+    @Override
+    public String startParamDemo(TestParamDO testParamDO){
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("param",testParamDO);
+        Execution execution = runtimeService.startProcessInstanceByKey("param_demo", params);
+        System.out.println("实例启动成功，实例ID：" + execution.getProcessInstanceId());
+        return execution.getProcessInstanceId();
     }
 }

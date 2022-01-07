@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.TestParamDO;
+
 import java.util.Map;
 
 public interface CamundaRunService {
@@ -8,4 +10,5 @@ public interface CamundaRunService {
     String approveTask(String taskId, boolean passed);
     String testQueryHistory(Map<String,Object> params);
     String startLinstenerBPMNDemo();
+    String startParamDemo(TestParamDO testParamDO);
 }
